@@ -1,4 +1,3 @@
 {
-    "root": "docs",
-    "plugins": ["toggle-chapters"]
+    "root": "docs"
 }
