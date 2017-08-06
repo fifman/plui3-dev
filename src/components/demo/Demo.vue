@@ -1,17 +1,29 @@
 <template>
-    <div class="demo">
-        <button @click="show">{{msg}}</button>
-    </div>
+    <sub-demo></sub-demo>
 </template>
 
 <script>
+    import SubDemo from './SubDemo.vue'
+
     export default {
-        props: ['msg'],
+        components: {SubDemo},
         name: 'demo',
-        methods: {
-            show: function (event) {
-                this.msg = '你点击了组件！'
-            }
+        created () {
+            // 注册`store`模块，详情请读`vuex`文档。
+            this.$store.registerModule('demo', {
+                namespaced: true,
+                // 注意和组件的data类似，此处应返回一个创建state对象的函数
+                state () {
+                    return {
+                        msg: 'Hello! This is the welcome message!'
+                    }
+                },
+                mutations: {
+                    change (state) {
+                        state.msg = 'Message changed!'
+                    }
+                }
+            })
         }
     }
 </script>

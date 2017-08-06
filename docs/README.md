@@ -80,12 +80,13 @@ npm test
 
 ```javascript
     alias: {
-        '@r': resolve('src'),
+        '@s': resolve('src'),
+        '@r': resolve('.'),
         '@c': resolve('src/components')
     }
 ```
 
-定义了`@r`表示`src`文件夹，`@c`表示`src/components`文件夹。因此，在import组件或者资源时，可以使用如下语法：
+定义了`@r`表示项目根文件夹，`@s`表示`src`文件夹，`@c`表示`src/components`文件夹。因此，在import组件或者资源时，可以使用如下语法：
 
 ```javascript
 import Hello from @r/components/hello/Hello
@@ -131,7 +132,7 @@ import Hello from @c/demo/Demo
 
 ## 路由
 
-本项目使用了路由，用于方便展示组件。但路由不是组件的必要依赖。需要展示某个组件（例如`Demo`）时，只需要修改`router/index.js`中的组件和路径配置，并在`index.html`中添加相应的`router-link`，就可以在展示页面通过点击标签切换组件。
+本项目使用了路由，用于方便展示组件。但路由不是组件的必要依赖。需要展示某个组件（例如`Demo`）时，只需要修改`router/index.js`中的组件和路径配置，并在`SideMenu`组件的参数中配置菜单`index`属性为对应的路径，就可以在展示页面通过点击左侧菜单切换组件。
 
 ### 添加路由配置
 
@@ -158,3 +159,9 @@ import Demo from '@c/demo/View' //导入组件实例
 ```
 
 SideMenu组件开启了路由功能。点击菜单，就会跳转到`mid`指定的路径。
+
+## 状态管理（`Vuex`）
+
+复杂组件中各组成子组件或者父子之间的内部通讯，更适合使用[Vuex](https://vue-loader.vuejs.org/zh-cn/)做全局状态管理。例如一个存在父、子、孙组件的三层组件，如果使用`props`传值，需要父传子、子传孙，编写十分繁琐。而全局状态可以直接和任意层级的组件直接沟通。
+
+注意`Vuex`的状态对象`store`只能在`Vue`根实例注入，通过根实例注入到各个子组件中。用例可参考`demo`组件。

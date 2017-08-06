@@ -6,6 +6,7 @@ import AsyncComputed from 'vue-async-computed'
 Vue.use(AsyncComputed)
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
+import store from './store'
 import router from './router'
 import ElementUI from 'element-ui'
 import SideMenu from '@c/sideMenu/SideMenu'
@@ -21,11 +22,11 @@ Vue.component('plui-table', PluiTable)
 Vue.component('plui-pagination', PluiPagination)
 Vue.component('plui-datagrid', PluiDatagrid)
 Vue.component('plui-combogrid', PluiCombogrid)
-
 Vue.config.productionTip = false
 
 new Vue({
     el: '#app',
+    store,
     router,
     data: {
         items: [{
